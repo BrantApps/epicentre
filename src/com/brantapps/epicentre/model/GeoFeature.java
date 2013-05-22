@@ -10,6 +10,7 @@ import org.joda.time.LocalDate;
  * @author David C Branton
  */
 public class GeoFeature {
+  private final GeoJsonType type;
   private final double latitude;
   private final double longitude;
   private double depth;
@@ -42,8 +43,17 @@ public class GeoFeature {
   public GeoFeature(final GeoJsonType type,
                     final double latitude,
                     final double longitude) {
+    this.type = type;
     this.latitude = latitude;
     this.longitude = longitude;
+  }
+
+
+  /**
+   * @return the {@link GeoJsonType} of this feature.
+   */
+  public GeoJsonType getType() {
+    return type;
   }
 
 
@@ -61,6 +71,7 @@ public class GeoFeature {
   public double getLongitude() {
     return longitude;
   }
+
 
   /**
    * @return the depth the quake occurred.

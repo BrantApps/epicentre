@@ -11,7 +11,8 @@ package com.brantapps.epicentre.model;
 public enum GeoJsonType {
   FEATURE_COLLECTION("GeoFeatureCollection"),
   FEATURE("Feature"),
-  POINT("Point");
+  POINT("Point"),
+  UNRECOGNISED("");
 
   private String type;
 
@@ -31,5 +32,30 @@ public enum GeoJsonType {
    */
   public String getType() {
     return type;
+  }
+
+
+  /**
+   * Perform a safe comparison of type strings
+   * with case insensitivity and a fallback status
+   * should a new {@link GeoJsonType} be introduced.
+   *
+   * @param type The type string to encode.
+   * @return  the {@link GeoJsonType} or {@link #UNRECOGNISED} when no match is found.
+   */
+  public static GeoJsonType safeValueOf(final String type) {
+    GeoJsonType geoJsonType = null;
+    if (type != null) {
+      for (GeoJsonType geoJsonTypeToCompare : values()) {
+        if (geoJsonTypeToCompare.getType().toLowerCase().equals(type.toLowerCase())) {
+          geoJsonType = geoJsonTypeToCompare;
+        }
+      }
+    }
+    if (geoJsonType == null) {
+      geoJsonType = UNRECOGNISED;
+    }
+
+    return geoJsonType;
   }
 }

@@ -17,6 +17,8 @@ import com.google.gson.annotations.SerializedName;
  * {@link http://earthquake.usgs.gov/research/dyfi/}</dd>
  * </p>
  *
+ *
+ * @see http://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson_detail.php
  * @author David C Branton
  */
 public class GeoFeatureGsonTemplate {

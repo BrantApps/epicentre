@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -18,6 +20,9 @@ import android.util.Log;
 import com.brantapps.epicentre.handler.GeoFeatureGsonTemplate.Feature;
 import com.brantapps.epicentre.model.GeoFeature;
 import com.brantapps.epicentre.model.GeoFeatureCollection;
+import com.brantapps.epicentre.model.GeoJsonType;
+import com.brantapps.epicentre.model.PagerAlertLevel;
+import com.brantapps.epicentre.model.ReviewStatus;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -33,7 +38,7 @@ import com.google.gson.stream.JsonReader;
  * @author David C Branton
  */
 public class GeoFeatureParser {
-
+  @Inject GeoFeatureParser() { }
 
   /**
    * Parse the GeoJSON response from USGS.
@@ -47,6 +52,9 @@ public class GeoFeatureParser {
     final Gson gsonBuilder = new GsonBuilder()
       .registerTypeAdapter(URL.class, new UrlDeserializer())
       .registerTypeAdapter(String[].class, new ContributorsDeserializer())
+      .registerTypeAdapter(PagerAlertLevel.class, new PagerAlertLevelDeserializer())
+      .registerTypeAdapter(ReviewStatus.class, new ReviewStatusDeserializer())
+      .registerTypeAdapter(GeoJsonType.class, new GeoJsonTypeDeserializer())
       .create();
     final GeoFeatureGsonTemplate message = gsonBuilder.fromJson(reader, GeoFeatureGsonTemplate.class);
     reader.close();
@@ -60,8 +68,8 @@ public class GeoFeatureParser {
     for (Feature feature : message.features) {
       final GeoFeature geoFeature =
           new GeoFeature(feature.geometry.type,
-                         feature.geometry.coordinates[0],
-                         feature.geometry.coordinates[1]);
+                         feature.geometry.coordinates[1],
+                         feature.geometry.coordinates[0]);
       geoFeature.setDepth(feature.geometry.coordinates[2]);
       geoFeature.setMagnitude(feature.properties.mag);
       geoFeature.setLocation(feature.properties.place);
@@ -110,9 +118,49 @@ public class GeoFeatureParser {
      */
     @Override
     public String[] deserialize(final JsonElement json,
-                           final Type typeOfT,
-                           final JsonDeserializationContext context) throws JsonParseException {
+                                final Type typeOfT,
+                                final JsonDeserializationContext context) throws JsonParseException {
       return StringUtils.split(json.getAsString(), ",");
+    }
+  }
+
+
+  private class PagerAlertLevelDeserializer implements JsonDeserializer<PagerAlertLevel> {
+
+    /**
+     * @see com.google.gson.JsonDeserializer#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext)
+     */
+    @Override
+    public PagerAlertLevel deserialize(final JsonElement json,
+                                       final Type typeOfT,
+                                       final JsonDeserializationContext context) throws JsonParseException {
+      return PagerAlertLevel.safeValueOf(json.getAsString());
+    }
+  }
+
+  private class ReviewStatusDeserializer implements JsonDeserializer<ReviewStatus> {
+
+    /**
+     * @see com.google.gson.JsonDeserializer#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext)
+     */
+    @Override
+    public ReviewStatus deserialize(final JsonElement json,
+                                    final Type typeOfT,
+                                    final JsonDeserializationContext context) throws JsonParseException {
+      return ReviewStatus.safeValueOf(json.getAsString());
+    }
+  }
+
+  private class GeoJsonTypeDeserializer implements JsonDeserializer<GeoJsonType> {
+
+    /**
+     * @see com.google.gson.JsonDeserializer#deserialize(com.google.gson.JsonElement, java.lang.reflect.Type, com.google.gson.JsonDeserializationContext)
+     */
+    @Override
+    public GeoJsonType deserialize(final JsonElement json,
+                                   final Type typeOfT,
+                                   final JsonDeserializationContext context) throws JsonParseException {
+      return GeoJsonType.safeValueOf(json.getAsString());
     }
   }
 }

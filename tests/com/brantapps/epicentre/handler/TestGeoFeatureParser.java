@@ -118,6 +118,7 @@ public class TestGeoFeatureParser extends TestCase {
       protected boolean matchesSafely(final GeoFeature geoFeature) {
         return geoFeature.getLatitude() == geoFeatureToCompare.getLatitude() &&
                geoFeature.getLongitude() == geoFeatureToCompare.getLongitude() &&
+               geoFeature.getType() == geoFeatureToCompare.getType() &&
                geoFeature.getDepth() == geoFeatureToCompare.getDepth() &&
                geoFeature.getAlertLevel() == geoFeatureToCompare.getAlertLevel() &&
                geoFeature.getCode().equals(geoFeatureToCompare.getCode()) &&

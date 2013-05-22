@@ -1,5 +1,16 @@
 <resources>
 
     <string name="app_name">Epicentre</string>
+    <string name="sync.report.label">Sync report</string>
+    <string name="retrieving.latest.report.message">Retrieving latest report</string>
+    <string name="report.type.message">Retrieving 2.5M+ 30 day report</string>
+    <string name="report.help.message">On completion the map view will display the results</string>
+    <string name="report.retrieved.message">Successfully retrieved 2.5M+ 30 day report</string>
+    <string name="report.earthquakes.found.message">%1$s earthquake events identified</string>
+    <string name="refreshing.map.message">Refreshing map…</string>
+    <string name="will.not.refresh.map.message">Sorry, an error occurred.</string>
+    <string name="displayed.report.title">Report: %1$s compiled on %2$s</string>
+    <string name="map.balloon.title">M%1$s: %2$s</string>
+    <string name="map.snippet.title">When: %1$s</string>
 
 </resources>

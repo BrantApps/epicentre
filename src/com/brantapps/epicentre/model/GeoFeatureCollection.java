@@ -16,6 +16,7 @@ import org.joda.time.Period;
  * @author David C Branton
  */
 public class GeoFeatureCollection implements List<GeoFeature> {
+  private long identifier;
   private final List<GeoFeature> geoFeatures;
   private LocalDate generated;
   private URL url;
@@ -318,5 +319,21 @@ public class GeoFeatureCollection implements List<GeoFeature> {
    */
   public void setCacheMaxAge(final Period cacheMaxAge) {
     this.cacheMaxAge = cacheMaxAge;
+  }
+
+
+  /**
+   * @return Retrieve the database identifier.
+   */
+  public long getIdentifier() {
+    return identifier;
+  }
+
+
+  /**
+   * @param identifier Assign the database identifier.
+   */
+  public void setIdentifier(final long identifier) {
+    this.identifier = identifier;
   }
 }
