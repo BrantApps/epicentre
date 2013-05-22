@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 
 import android.content.ContentValues;
@@ -141,7 +141,7 @@ public class GeoFeatureCollectionService implements ServiceInterface<GeoFeatureC
       cursor.moveToNext();
     }
     geoFeatureCollection.setIdentifier(cursor.getLong(0));
-    geoFeatureCollection.setGenerated(new LocalDate(cursor.getLong(1)));
+    geoFeatureCollection.setGenerated(new LocalDateTime(cursor.getLong(1)));
     geoFeatureCollection.setUrl(new URL(cursor.getString(2)));
     geoFeatureCollection.setTitle(cursor.getString(3));
     geoFeatureCollection.setSubTitle(cursor.getString(4));

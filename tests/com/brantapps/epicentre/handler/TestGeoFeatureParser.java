@@ -16,7 +16,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 
 import com.brantapps.epicentre.model.GeoFeature;
@@ -70,13 +70,13 @@ public class TestGeoFeatureParser extends TestCase {
   public void testParsingGeoFeature() throws IOException {
     // Given.
     final InputStream dummyUsgsResponse = new FileInputStream(new File("assets/test/usgs/v0.1/test_past_30_days.json"));
-    final GeoFeature geoFeature = new GeoFeature(GeoJsonType.POINT, -177.8835, -18.6467);
+    final GeoFeature geoFeature = new GeoFeature(GeoJsonType.POINT, -18.6467, -177.8835);
     geoFeature.setMagnitude(5);
     geoFeature.setMagnitudeType("mb");
     geoFeature.setLocation("237km NNE of Ndoi Island, Fiji");
     final DateTimeZone timezone = DateTimeZone.forOffsetHours(-720/60);
-    geoFeature.setTime(new LocalDate(1367660685870L, timezone));
-    geoFeature.setUpdatedTime(new LocalDate(1367662171267L, timezone));
+    geoFeature.setTime(new LocalDateTime(1367660685870L, timezone));
+    geoFeature.setUpdatedTime(new LocalDateTime(1367662171267L, timezone));
     geoFeature.setEventPageUrl(new URL("http://AU/earthquakes/eventpage/usc000gney"));
     geoFeature.setNoOfEyeWitnessReports(0);
     geoFeature.setMaximumReportedIntensity(1d);
@@ -135,8 +135,8 @@ public class TestGeoFeatureParser extends TestCase {
                geoFeature.getNoOfStationsReportingEvent() == geoFeatureToCompare.getNoOfStationsReportingEvent() &&
                geoFeature.getReviewStatus() == geoFeatureToCompare.getReviewStatus() &&
                geoFeature.getSignificance() == geoFeatureToCompare.getSignificance() &&
-               geoFeature.getTime().toString().equals(geoFeatureToCompare.getTime().toString()) &&
-               geoFeature.getUpdatedTime().toString().equals(geoFeatureToCompare.getUpdatedTime().toString());
+               geoFeature.getTime().toDate().getTime() == geoFeatureToCompare.getTime().toDate().getTime() &&
+               geoFeature.getUpdatedTime().toDate().getTime() == geoFeatureToCompare.getUpdatedTime().toDate().getTime();
       }
     };
   }

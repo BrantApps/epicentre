@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 
 import android.util.Log;
@@ -59,7 +59,7 @@ public class GeoFeatureParser {
     final GeoFeatureGsonTemplate message = gsonBuilder.fromJson(reader, GeoFeatureGsonTemplate.class);
     reader.close();
 
-    featureCollection.setGenerated(new LocalDate(message.metadata.generated));
+    featureCollection.setGenerated(new LocalDateTime(message.metadata.generated));
     featureCollection.setTitle(message.metadata.title);
     featureCollection.setSubTitle(message.metadata.subTitle);
     featureCollection.setUrl(message.metadata.url);
@@ -74,8 +74,8 @@ public class GeoFeatureParser {
       geoFeature.setMagnitude(feature.properties.mag);
       geoFeature.setLocation(feature.properties.place);
       final DateTimeZone timezone = DateTimeZone.forOffsetHours(feature.properties.tz/60);
-      geoFeature.setTime(new LocalDate(feature.properties.time, timezone));
-      geoFeature.setUpdatedTime(new LocalDate(feature.properties.updated, timezone));
+      geoFeature.setTime(new LocalDateTime(feature.properties.time, timezone));
+      geoFeature.setUpdatedTime(new LocalDateTime(feature.properties.updated, timezone));
       geoFeature.setEventPageUrl(feature.properties.url);
       geoFeature.setNoOfEyeWitnessReports(feature.properties.felt);
       geoFeature.setMaximumReportedIntensity(feature.properties.cdi);

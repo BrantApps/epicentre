@@ -2,7 +2,7 @@ package com.brantapps.epicentre.model;
 
 import java.net.URL;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 /**
  * An earth feature.
@@ -16,8 +16,8 @@ public class GeoFeature {
   private double depth;
   private double magnitude;
   private String location;
-  private LocalDate time;
-  private LocalDate updatedTime;
+  private LocalDateTime time;
+  private LocalDateTime updatedTime;
   private URL eventPageUrl;
   private int noOfEyeWitnessReports;
   private Double maximumReportedIntensity;
@@ -126,7 +126,7 @@ public class GeoFeature {
   /**
    * @return the time the quake occurred.
    */
-  public LocalDate getTime() {
+  public LocalDateTime getTime() {
     return time;
   }
 
@@ -134,7 +134,7 @@ public class GeoFeature {
   /**
    * @param time Assign the date the quake occurred.
    */
-  public void setTime(final LocalDate time) {
+  public void setTime(final LocalDateTime time) {
     this.time = time;
   }
 
@@ -142,7 +142,7 @@ public class GeoFeature {
   /**
    * @return the updatedTime of the report.
    */
-  public LocalDate getUpdatedTime() {
+  public LocalDateTime getUpdatedTime() {
     return updatedTime;
   }
 
@@ -150,7 +150,7 @@ public class GeoFeature {
   /**
    * @param updatedTime Assign the updated time of the report.
    */
-  public void setUpdatedTime(final LocalDate updatedTime) {
+  public void setUpdatedTime(final LocalDateTime updatedTime) {
     this.updatedTime = updatedTime;
   }
 

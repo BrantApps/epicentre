@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteCursor;
@@ -131,7 +131,7 @@ public class GeoFeatureService implements ServiceInterface<GeoFeature> {
                                                cursor.getDouble(5),
                                                cursor.getDouble(6));
     geoFeature.setCode(cursor.getString(0));
-    geoFeature.setTime(new LocalDate(cursor.getLong(3)));
+    geoFeature.setTime(new LocalDateTime(cursor.getLong(3)));
     geoFeature.setLocation(cursor.getString(4));
     geoFeature.setMagnitude(cursor.getDouble(7));
     geoFeature.setMagnitudeType(cursor.getString(8));

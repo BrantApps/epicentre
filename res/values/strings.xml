@@ -9,7 +9,7 @@
     <string name="report.earthquakes.found.message">%1$s earthquake events identified</string>
     <string name="refreshing.map.message">Refreshing map…</string>
     <string name="will.not.refresh.map.message">Sorry, an error occurred.</string>
-    <string name="displayed.report.title">Report: %1$s compiled on %2$s</string>
+    <string name="displayed.report.title">%1$s compiled on %2$s</string>
     <string name="map.balloon.title">M%1$s: %2$s</string>
     <string name="map.snippet.title">When: %1$s</string>
 

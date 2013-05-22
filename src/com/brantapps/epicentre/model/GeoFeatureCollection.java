@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.Period;
 
 /**
@@ -18,7 +18,7 @@ import org.joda.time.Period;
 public class GeoFeatureCollection implements List<GeoFeature> {
   private long identifier;
   private final List<GeoFeature> geoFeatures;
-  private LocalDate generated;
+  private LocalDateTime generated;
   private URL url;
   private String title;
   private String subTitle;
@@ -243,7 +243,7 @@ public class GeoFeatureCollection implements List<GeoFeature> {
   /**
    * @return the date the feature collection report was assembled.
    */
-  public LocalDate getGenerated() {
+  public LocalDateTime getGenerated() {
     return generated;
   }
 
@@ -251,7 +251,7 @@ public class GeoFeatureCollection implements List<GeoFeature> {
   /**
    * @param Assign the date the feature collection report was assembled.
    */
-  public void setGenerated(final LocalDate generated) {
+  public void setGenerated(final LocalDateTime generated) {
     this.generated = generated;
   }
 
